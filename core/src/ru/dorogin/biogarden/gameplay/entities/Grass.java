@@ -8,10 +8,12 @@ import ru.dorogin.biogarden.gameplay.EntityContainer;
 
 public class Grass extends Entity {
 
+    private static final int TEXTURE_QUALITY = 128;
+
     private static final Texture grassTexture;
 
     static {
-        grassTexture = createCircleTexture();
+        grassTexture = generateCircleTexture();
     }
 
     public Grass(int x, int y) {
@@ -30,20 +32,13 @@ public class Grass extends Entity {
         return true;
     }
 
-    private static Texture createCircleTexture() {
-        // Создаем новый объект Pixmap с заданными размерами
-        int width = 64;
-        int height = 64;
-        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-
-        // Задаем цвет круга (в данном случае красный)
-        Color color = Color.GREEN;
-
-        // Рисуем круг на Pixmap
-        pixmap.setColor(color);
-        pixmap.fillCircle(width / 2, height / 2, width / 2);
-
-        // Создаем новую текстуру из Pixmap
-        return new Texture(pixmap);
+    private static Texture generateCircleTexture() {
+        Pixmap pixmap = new Pixmap(TEXTURE_QUALITY, TEXTURE_QUALITY, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.GREEN);
+        pixmap.fillCircle(TEXTURE_QUALITY / 2, TEXTURE_QUALITY / 2, TEXTURE_QUALITY / 2);
+        Texture texture = new Texture(pixmap);
+        pixmap.dispose();
+        return texture;
     }
+
 }
