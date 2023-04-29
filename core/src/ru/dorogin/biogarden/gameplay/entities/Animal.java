@@ -1,6 +1,7 @@
 package ru.dorogin.biogarden.gameplay.entities;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import lombok.Getter;
 import ru.dorogin.biogarden.gameplay.EntityContainer;
 import ru.dorogin.biogarden.gameplay.dna.commands.Command;
 import ru.dorogin.biogarden.gameplay.dna.DNA;
@@ -8,7 +9,9 @@ import ru.dorogin.biogarden.gameplay.dna.DNA;
 public class Animal extends Entity {
     private static final int BASE_ENERGY = 1000;
     private static final int TACT_ENERGY = 1;
+    private static final int MAX_NON_TERMINATE_COMMANDS = 20;
 
+    @Getter
     private final DNA dna;
     private int energy;
 
@@ -21,14 +24,14 @@ public class Animal extends Entity {
     @Override
     public void update(EntityContainer entityContainer) {
         energy -= TACT_ENERGY;
-        while (true) {
+        for(int i = 0; i < MAX_NON_TERMINATE_COMMANDS; i++){
             Command command = dna.getNextCommand();
             energy -= command.energyCost();
             if(energy >= 0) {
                 command.process(this, entityContainer);
             }
             if(command.isTerminateCommand()) {
-                return;
+                break;
             }
         }
     }

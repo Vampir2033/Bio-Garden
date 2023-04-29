@@ -26,7 +26,7 @@ public class DNA {
         int code = getNextCode() % AMOUNT_COMMANDS;
         switch (code) {
             case 0: return new MoveCommand(this);
-//            case 1: return new JumpCommand();
+            case 1: return new JumpCommand(this);
 //            case 2: return new CheckByGrassCommand();
 //            case 3: return new CheckByAnimalCommand();
 //            case 5: return new NopCommand();
