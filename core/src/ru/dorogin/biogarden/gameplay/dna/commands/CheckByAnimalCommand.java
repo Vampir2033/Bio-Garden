@@ -1,21 +1,11 @@
 package ru.dorogin.biogarden.gameplay.dna.commands;
 
+import ru.dorogin.biogarden.gameplay.dna.DNA;
 import ru.dorogin.biogarden.gameplay.entities.Animal;
-import ru.dorogin.biogarden.gameplay.EntityContainer;
 
-public class CheckByAnimalCommand implements Command {
-    @Override
-    public void process(Animal animal, EntityContainer entityContainer) {
+public class CheckByAnimalCommand extends CheckNearCommand {
 
-    }
-
-    @Override
-    public int energyCost() {
-        return 0;
-    }
-
-    @Override
-    public boolean isTerminateCommand() {
-        return false;
+    public CheckByAnimalCommand(DNA dna) {
+        super(dna, Animal.class);
     }
 }

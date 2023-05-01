@@ -5,7 +5,7 @@ import ru.dorogin.biogarden.gameplay.dna.commands.*;
 import java.util.Random;
 
 public class DNA {
-    private static int AMOUNT_COMMANDS = 5;
+    private static int AMOUNT_COMMANDS = 6;
     private byte[] sequence;
     private int currentPosition = 0;
 
@@ -27,12 +27,12 @@ public class DNA {
         switch (code) {
             case 0: return new MoveCommand(this);
             case 1: return new JumpCommand(this);
-//            case 2: return new CheckByGrassCommand();
-//            case 3: return new CheckByAnimalCommand();
-//            case 5: return new NopCommand();
-//            default: return null;
+            case 2: return new CheckByGrassCommand(this);
+            case 3: return new CheckByAnimalCommand(this);
+            case 5: return new NopCommand();
+            default: return null;
         }
-        return new MoveCommand(this);
+//        return new MoveCommand(this);
     }
 
     public byte getNextCode() {
