@@ -48,12 +48,8 @@ public class Animal extends Entity {
         energy -= ammEnergy;
     }
 
-    public void eatGrass() {
-        energy += 300;
-    }
-
-    public void eatMeat() {
-        energy += 500;
+    public void addEnergy(int ammEnergy) {
+        energy += ammEnergy;
     }
 
     private static Texture generateSquare(Color color) {

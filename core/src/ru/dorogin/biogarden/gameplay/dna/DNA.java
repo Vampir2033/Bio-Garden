@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class DNA {
     private static final float mutateProbability = 0.0005f;
-    private static final int AMOUNT_COMMANDS = 6;
+    private static final int AMOUNT_COMMANDS = 9;
     private final byte[] genSequence;
     private int currentPosition = 0;
 
@@ -38,10 +38,13 @@ public class DNA {
         switch (code) {
             case 0: return new MoveCommand(this);
             case 1: return new JumpCommand(this);
-            case 2: return new CheckByGrassCommand(this);
-            case 3: return new CheckByAnimalCommand(this);
-            case 4: return new NopCommand();
-            case 5: return new ReproductionCommand(this);
+            case 2: return new CheckByMeatCommand(this);
+            case 3: return new CheckByGrassCommand(this);
+            case 4: return new CheckByAnimalCommand(this);
+            case 5: return new PlantEatCommand(this);
+            case 6: return new MeatEatCommand(this);
+            case 7: return new NopCommand();
+            case 8: return new ReproductionCommand(this);
             default: return null;
         }
     }
