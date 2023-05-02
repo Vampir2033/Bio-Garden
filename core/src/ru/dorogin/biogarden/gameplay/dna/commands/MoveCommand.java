@@ -4,8 +4,6 @@ import ru.dorogin.biogarden.gameplay.entities.Animal;
 import ru.dorogin.biogarden.gameplay.entities.Entity;
 import ru.dorogin.biogarden.gameplay.EntityContainer;
 import ru.dorogin.biogarden.gameplay.dna.DNA;
-import ru.dorogin.biogarden.gameplay.entities.Grass;
-import ru.dorogin.biogarden.gameplay.entities.Meat;
 
 public class MoveCommand implements Command {
     private static final int MOVE_ENERGY = 10;
@@ -22,6 +20,7 @@ public class MoveCommand implements Command {
         if(animal.getEnergy() >= MOVE_ENERGY) {
             Entity toCellEntity = entityContainer.getEntity(toX, toY);
             if(toCellEntity == null) {
+                animal.subEnergy(MOVE_ENERGY);
                 entityContainer.moveEntity(animal, toX, toY);
             }
 //            else if(toCellEntity.getClass() == Grass.class) {
