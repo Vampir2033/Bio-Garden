@@ -49,6 +49,10 @@ public class Animal extends Entity {
         energy += 300;
     }
 
+    public void eatMeat() {
+        energy += 500;
+    }
+
     private static Texture generateSquare(Color color) {
         Pixmap squarePixmap = new Pixmap(1, 1, Pixmap.Format.RGB888);
         squarePixmap.setColor(color);

@@ -10,6 +10,7 @@ import ru.dorogin.biogarden.gameplay.dna.DNA;
 import ru.dorogin.biogarden.gameplay.entities.Animal;
 import ru.dorogin.biogarden.gameplay.entities.Entity;
 import ru.dorogin.biogarden.gameplay.entities.Grass;
+import ru.dorogin.biogarden.gameplay.entities.Meat;
 
 import java.util.Random;
 
@@ -96,6 +97,7 @@ public class Gameplay {
                 entity.update(entityContainer);
                 if(!entity.isAlive()) {
                     entityContainer.removeEntity(entity.x, entity.y);
+                    entityContainer.addEntity(new Meat(entity.x, entity.y));
                 }
             }
         }
