@@ -1,5 +1,8 @@
 package ru.dorogin.biogarden.gameplay.entities;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,8 +19,8 @@ public class Animal extends Entity {
     @Getter @Setter
     private int energy;
 
-    public Animal(int x, int y, Sprite sprite, DNA dna, int energy) {
-        super(x, y, sprite);
+    public Animal(int x, int y, DNA dna, int energy) {
+        super(x, y, new Sprite(generateSquare(dna.getDnaColor())));
         this.dna = dna;
         this.energy = energy;
     }
@@ -44,5 +47,12 @@ public class Animal extends Entity {
 
     public void eatGrass() {
         energy += 300;
+    }
+
+    private static Texture generateSquare(Color color) {
+        Pixmap squarePixmap = new Pixmap(1, 1, Pixmap.Format.RGB888);
+        squarePixmap.setColor(color);
+        squarePixmap.fill();
+        return new Texture(squarePixmap);
     }
 }

@@ -25,7 +25,7 @@ public class ReproductionCommand implements Command {
                 if(entity == null) {
                     int energyForChildren = (int) (animal.getEnergy() * animal.getDna().getPercentOfEnergyForChildren());
                     animal.setEnergy(animal.getEnergy() - energyForChildren);
-                    entityContainer.addEntity(new Animal(toX, toY, animal.sprite, animal.getDna(), energyForChildren));
+                    entityContainer.addEntity(new Animal(toX, toY, animal.getDna().getDnaCopyWithMutate(), energyForChildren));
                     finalShift = 0;
                 } else {
                     finalShift = shiftIfCantReproduct;

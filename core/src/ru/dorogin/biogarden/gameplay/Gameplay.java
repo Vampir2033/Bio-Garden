@@ -13,18 +13,16 @@ import ru.dorogin.biogarden.gameplay.entities.Grass;
 
 import java.util.Random;
 
-import static com.badlogic.gdx.graphics.Color.*;
-
 public class Gameplay {
     private long lastUpdateTime;
-    private final static float fps = 30;
+    private final static float fps = 50;
     private final static float updateInterval = 1.0f / fps; // интервал обновления в секундах
     private final EntityContainer entityContainer;
-    private final static int COUNT_ENTITIES = 600;
-    private final static int COUNT_GRASS = 1000;
+    private final static int COUNT_ENTITIES = 100;
+    private final static int COUNT_GRASS = 500;
 
     private final static float PLANT_GENERATE_CHANCE = 0.3f;
-    private final static int MAX_COUNT_PLANT = 50;
+    private final static int MAX_COUNT_PLANT = 20;
 
     public Gameplay(int width, int height) {
         entityContainer = new EntityContainer(width, height);
@@ -42,10 +40,7 @@ public class Gameplay {
         for (long count = COUNT_ENTITIES; count > 0; count--) {
             try {
                 Random rnd = new Random();
-                Animal animal = generateAnimal(new Color(
-                        Color.rgb888(rnd.nextInt(256)
-                                , rnd.nextInt(256)
-                                , rnd.nextInt(256))));
+                Animal animal = generateAnimal();
                 entityContainer.addEntity(animal);
             } catch (Exception ignored) {}
         }
@@ -110,20 +105,11 @@ public class Gameplay {
         return entityContainer.getAllEntities();
     }
 
-    private Texture generateSquare(Color color) {
-        Pixmap squarePixmap = new Pixmap(1, 1, Pixmap.Format.RGB888);
-        squarePixmap.setColor(color);
-        squarePixmap.fill();
-        return new Texture(squarePixmap);
-    }
-
-    private Animal generateAnimal(Color color) {
+    private Animal generateAnimal() {
         int x = new Random().nextInt(entityContainer.getWidth());
         int y = new Random().nextInt(entityContainer.getHeight());
-        Texture texture = generateSquare(color);
-        Sprite sprite = new Sprite(texture);
-        DNA dna = new DNA(500);
-        return new Animal(x, y, sprite, dna, 1000);
+        DNA dna = new DNA(1000);
+        return new Animal(x, y, dna, 1000);
     }
 
     private Grass generateGrass() {
