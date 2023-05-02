@@ -6,6 +6,7 @@ import ru.dorogin.biogarden.gameplay.entities.Animal;
 import ru.dorogin.biogarden.gameplay.entities.Entity;
 
 public class ReproductionCommand implements Command {
+    private static final int BASE_REPRODUCTION_ENERGY = 500;
     private final Direction reproductionSide;
     private final byte shiftIfCantReproduct;
 
@@ -16,7 +17,7 @@ public class ReproductionCommand implements Command {
 
     @Override
     public void process(Animal animal, EntityContainer entityContainer) {
-        if(animal.getEnergy() >= animal.getDna().getReproductionEnergy()) {
+        if(animal.getEnergy() + BASE_REPRODUCTION_ENERGY >= animal.getDna().getReproductionEnergy()) {
             int toX = animal.x + reproductionSide.x;
             int toY = animal.y + reproductionSide.y;
             int finalShift;
@@ -24,7 +25,7 @@ public class ReproductionCommand implements Command {
                 Entity entity = entityContainer.getEntity(toX, toY);
                 if(entity == null) {
                     int energyForChildren = (int) (animal.getEnergy() * animal.getDna().getPercentOfEnergyForChildren());
-                    animal.setEnergy(animal.getEnergy() - energyForChildren);
+                    animal.subEnergy(energyForChildren + BASE_REPRODUCTION_ENERGY);
                     entityContainer.addEntity(new Animal(toX, toY, animal.getDna().getDnaCopyWithMutate(), energyForChildren));
                     finalShift = 0;
                 } else {

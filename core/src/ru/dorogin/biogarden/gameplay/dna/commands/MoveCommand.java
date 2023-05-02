@@ -23,15 +23,6 @@ public class MoveCommand implements Command {
                 animal.subEnergy(MOVE_ENERGY);
                 entityContainer.moveEntity(animal, toX, toY);
             }
-//            else if(toCellEntity.getClass() == Grass.class) {
-//                animal.eatGrass();
-//                entityContainer.removeEntity(toX, toY);
-//                entityContainer.moveEntity(animal, toX, toY);
-//            } else if(toCellEntity.getClass() == Meat.class) {
-//                animal.eatMeat();
-//                entityContainer.removeEntity(toX, toY);
-//                entityContainer.moveEntity(animal, toX, toY);
-//            }
         }
     }
 
