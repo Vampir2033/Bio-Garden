@@ -18,15 +18,18 @@ public class Animal extends Entity {
     private final DNA dna;
     @Getter @Setter
     private int energy;
+    private int age;
 
     public Animal(int x, int y, DNA dna, int energy) {
         super(x, y, new Sprite(generateSquare(dna.getDnaColor())));
         this.dna = dna;
         this.energy = energy;
+        age = 0;
     }
 
     @Override
     public void update(EntityContainer entityContainer) {
+        age++;
         energy -= TACT_ENERGY;
         for(int i = 0; i < MAX_NON_TERMINATE_COMMANDS; i++){
             Command command = dna.getNextCommand();
@@ -41,7 +44,7 @@ public class Animal extends Entity {
 
     @Override
     public boolean isAlive() {
-        return energy > 0;
+        return energy > 0 && age <= dna.getMaxAge();
     }
 
     public void subEnergy(int ammEnergy) {

@@ -16,11 +16,14 @@ public class DNA {
     private final int reproductionEnergy;
     @Getter
     private final float percentOfEnergyForChildren;
+    @Getter
+    private final int maxAge;
 
-    public DNA(byte[] genSequence, int reproductionEnergy, float percentOfEnergyForChildren) {
+    public DNA(byte[] genSequence, int reproductionEnergy, float percentOfEnergyForChildren, int maxAge) {
         this.genSequence = genSequence;
         this.reproductionEnergy = reproductionEnergy;
         this.percentOfEnergyForChildren = percentOfEnergyForChildren;
+        this.maxAge = maxAge;
     }
 
     public DNA(int length) {
@@ -30,6 +33,8 @@ public class DNA {
         }
         reproductionEnergy = 1500;
         percentOfEnergyForChildren = 0.5f;
+        maxAge = 1000;
+
     }
 
 
@@ -79,6 +84,6 @@ public class DNA {
                 childGenSequence[i] = genSequence[i];
             }
         }
-        return new DNA(childGenSequence, reproductionEnergy, percentOfEnergyForChildren);
+        return new DNA(childGenSequence, reproductionEnergy, percentOfEnergyForChildren, maxAge);
     }
 }
