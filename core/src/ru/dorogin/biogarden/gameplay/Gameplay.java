@@ -20,11 +20,11 @@ public class Gameplay {
     private final static float fps = 30;
     private final static float updateInterval = 1.0f / fps; // интервал обновления в секундах
     private final EntityContainer entityContainer;
-    private final static int COUNT_ENTITIES = 100;
-    private final static int COUNT_GRASS = 200;
+    private final static int COUNT_ENTITIES = 600;
+    private final static int COUNT_GRASS = 1000;
 
     private final static float PLANT_GENERATE_CHANCE = 0.3f;
-    private final static int MAX_COUNT_PLANT = 10;
+    private final static int MAX_COUNT_PLANT = 50;
 
     public Gameplay(int width, int height) {
         entityContainer = new EntityContainer(width, height);
@@ -47,9 +47,7 @@ public class Gameplay {
                                 , rnd.nextInt(256)
                                 , rnd.nextInt(256))));
                 entityContainer.addEntity(animal);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            } catch (Exception ignored) {}
         }
 
 
@@ -57,9 +55,7 @@ public class Gameplay {
             try {
                 Grass grass = generateGrass();
                 entityContainer.addEntity(grass);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            } catch (Exception ignored) {}
         }
 
 //        Animal animal = new Animal(5, 5, new Sprite(generateSquare(RED))
@@ -127,7 +123,7 @@ public class Gameplay {
         Texture texture = generateSquare(color);
         Sprite sprite = new Sprite(texture);
         DNA dna = new DNA(500);
-        return new Animal(x, y, sprite, dna);
+        return new Animal(x, y, sprite, dna, 1000);
     }
 
     private Grass generateGrass() {

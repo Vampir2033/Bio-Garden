@@ -2,23 +2,24 @@ package ru.dorogin.biogarden.gameplay.entities;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import lombok.Getter;
+import lombok.Setter;
 import ru.dorogin.biogarden.gameplay.EntityContainer;
 import ru.dorogin.biogarden.gameplay.dna.commands.Command;
 import ru.dorogin.biogarden.gameplay.dna.DNA;
 
 public class Animal extends Entity {
-    private static final int BASE_ENERGY = 1000;
     private static final int TACT_ENERGY = 1;
     private static final int MAX_NON_TERMINATE_COMMANDS = 20;
 
     @Getter
     private final DNA dna;
+    @Getter @Setter
     private int energy;
 
-    public Animal(int x, int y, Sprite sprite, DNA dna) {
+    public Animal(int x, int y, Sprite sprite, DNA dna, int energy) {
         super(x, y, sprite);
         this.dna = dna;
-        energy = BASE_ENERGY;
+        this.energy = energy;
     }
 
     @Override

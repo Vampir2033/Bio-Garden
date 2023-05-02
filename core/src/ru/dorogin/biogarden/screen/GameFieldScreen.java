@@ -12,8 +12,8 @@ import ru.dorogin.biogarden.gameplay.Gameplay;
 public class GameFieldScreen implements Screen {
 
     private static final int CELL_SIZE = 1;
-    private static final int GRID_WIDTH = 27*2 * CELL_SIZE;
-    private static final int GRID_HEIGHT = 15*2 * CELL_SIZE;
+    private static final int GRID_WIDTH = 27*4 * CELL_SIZE;
+    private static final int GRID_HEIGHT = 15*4 * CELL_SIZE;
 
     private final BioGardenGame game;
     private OrthographicCamera camera;
