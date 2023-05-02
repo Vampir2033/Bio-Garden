@@ -7,8 +7,11 @@ import ru.dorogin.biogarden.BioGardenGame;
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
 
-	private final static int WIDTH = 1366;
-	private final static int HEIGHT = 768;
+//	private final static int WIDTH = 1366;
+//	private final static int HEIGHT = 768;
+
+	private final static int WIDTH = 1920;
+	private final static int HEIGHT = 1080;
 
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();

@@ -19,6 +19,8 @@ public class EntityContainer {
     }
 
     public void addEntity(Entity entity) {
+        entity.x = castXToNormal(entity.x);
+        entity.y = castYToNormal(entity.y);
         if (!isCellOccupied(entity.x, entity.y)) {
                 entities[entity.x][entity.y] = entity;
         } else {
@@ -27,18 +29,26 @@ public class EntityContainer {
     }
 
     public void removeEntity(int x, int y) {
+        x = castXToNormal(x);
+        y = castYToNormal(y);
         entities[x][y] = null;
     }
 
     public Entity getEntity(int x, int y) {
+        x = castXToNormal(x);
+        y = castYToNormal(y);
         return entities[x][y];
     }
 
     public boolean isCellOccupied(int x, int y) {
+        x = castXToNormal(x);
+        y = castYToNormal(y);
         return entities[x][y] != null;
     }
 
     public void moveEntity(Entity entity, int toX, int toY) {
+        toX = castXToNormal(toX);
+        toY = castYToNormal(toY);
         if (isCellOccupied(toX, toY)) {
             throw new IllegalArgumentException("Attempt to move entity into invalid location");
         } else {
@@ -62,6 +72,22 @@ public class EntityContainer {
     }
 
     public boolean checkByOutside(int x, int y) {
-        return x >= 0 && x < width && y >= 0 && y < height;
+        return true;
+    }
+
+    private int castXToNormal(int x) {
+        if(x < 0) {
+            return width + x;
+        } else {
+            return x % width;
+        }
+    }
+
+    private int castYToNormal(int y) {
+        if(y < 0) {
+            return height + y;
+        } else {
+            return y % height;
+        }
     }
 }

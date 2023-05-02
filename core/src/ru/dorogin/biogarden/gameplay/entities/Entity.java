@@ -12,7 +12,7 @@ public abstract class Entity {
         this.x = x;
         this.y = y;
         this.sprite = sprite;
-        sprite.setSize(1, 1);
+        sprite.setSize(0.9f, 0.9f);
     }
 
     public abstract void update(EntityContainer entityContainer);

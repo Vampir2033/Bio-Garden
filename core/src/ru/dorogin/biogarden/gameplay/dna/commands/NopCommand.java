@@ -6,16 +6,10 @@ import ru.dorogin.biogarden.gameplay.EntityContainer;
 public class NopCommand implements Command {
     @Override
     public void process(Animal animal, EntityContainer entityContainer) {
-
-    }
-
-    @Override
-    public int energyCost() {
-        return 0;
     }
 
     @Override
     public boolean isTerminateCommand() {
-        return false;
+        return true;
     }
 }

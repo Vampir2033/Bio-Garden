@@ -13,4 +13,8 @@ public enum Direction {
         this.x = x;
         this.y = y;
     }
+
+    public static Direction getDirectionByNumber(int number) {
+        return values()[number % values().length];
+    }
 }

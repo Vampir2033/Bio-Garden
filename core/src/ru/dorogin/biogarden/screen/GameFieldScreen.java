@@ -12,8 +12,8 @@ import ru.dorogin.biogarden.gameplay.Gameplay;
 public class GameFieldScreen implements Screen {
 
     private static final int CELL_SIZE = 1;
-    private static final int GRID_WIDTH = 27 * CELL_SIZE;
-    private static final int GRID_HEIGHT = 15 * CELL_SIZE;
+    private static final int GRID_WIDTH = 27*5 * CELL_SIZE;
+    private static final int GRID_HEIGHT = 15*5 * CELL_SIZE;
 
     private final BioGardenGame game;
     private OrthographicCamera camera;
@@ -25,7 +25,6 @@ public class GameFieldScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, GRID_WIDTH, GRID_HEIGHT);
         shapeRenderer = new ShapeRenderer();
-
         gameplay = new Gameplay(GRID_WIDTH, GRID_HEIGHT);
     }
 
@@ -42,9 +41,8 @@ public class GameFieldScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         for(Entity entity : gameplay.getEntities()) {
-            game.batch.draw(entity.sprite, entity.x, entity.y);
-            entity.sprite.setX(entity.x);
-            entity.sprite.setY(entity.y);
+            entity.sprite.setX(entity.x + 0.05f);
+            entity.sprite.setY(entity.y + 0.05f);
             entity.sprite.draw(game.batch);
         }
         game.batch.end();
