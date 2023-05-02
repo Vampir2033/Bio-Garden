@@ -30,7 +30,6 @@ public class Animal extends Entity {
         energy -= TACT_ENERGY;
         for(int i = 0; i < MAX_NON_TERMINATE_COMMANDS; i++){
             Command command = dna.getNextCommand();
-            energy -= command.energyCost();
             if(energy >= 0) {
                 command.process(this, entityContainer);
             }
@@ -43,6 +42,10 @@ public class Animal extends Entity {
     @Override
     public boolean isAlive() {
         return energy > 0;
+    }
+
+    public void subEnergy(int ammEnergy) {
+        energy -= ammEnergy;
     }
 
     public void eatGrass() {

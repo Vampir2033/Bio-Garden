@@ -19,25 +19,21 @@ public class MoveCommand implements Command {
     public void process(Animal animal, EntityContainer entityContainer) {
         int toX = animal.x + direction.x;
         int toY = animal.y + direction.y;
-        if(entityContainer.checkByOutside(toX, toY)) {
+        if(animal.getEnergy() >= MOVE_ENERGY) {
             Entity toCellEntity = entityContainer.getEntity(toX, toY);
             if(toCellEntity == null) {
                 entityContainer.moveEntity(animal, toX, toY);
-            } else if(toCellEntity.getClass() == Grass.class) {
-                animal.eatGrass();
-                entityContainer.removeEntity(toX, toY);
-                entityContainer.moveEntity(animal, toX, toY);
-            } else if(toCellEntity.getClass() == Meat.class) {
-                animal.eatMeat();
-                entityContainer.removeEntity(toX, toY);
-                entityContainer.moveEntity(animal, toX, toY);
             }
+//            else if(toCellEntity.getClass() == Grass.class) {
+//                animal.eatGrass();
+//                entityContainer.removeEntity(toX, toY);
+//                entityContainer.moveEntity(animal, toX, toY);
+//            } else if(toCellEntity.getClass() == Meat.class) {
+//                animal.eatMeat();
+//                entityContainer.removeEntity(toX, toY);
+//                entityContainer.moveEntity(animal, toX, toY);
+//            }
         }
-    }
-
-    @Override
-    public int energyCost() {
-        return MOVE_ENERGY;
     }
 
     @Override

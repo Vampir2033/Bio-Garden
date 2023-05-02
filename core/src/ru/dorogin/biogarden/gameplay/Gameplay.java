@@ -40,7 +40,6 @@ public class Gameplay {
 
         for (long count = COUNT_ENTITIES; count > 0; count--) {
             try {
-                Random rnd = new Random();
                 Animal animal = generateAnimal();
                 entityContainer.addEntity(animal);
             } catch (Exception ignored) {}

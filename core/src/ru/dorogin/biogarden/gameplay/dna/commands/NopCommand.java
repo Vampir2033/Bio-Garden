@@ -9,11 +9,6 @@ public class NopCommand implements Command {
     }
 
     @Override
-    public int energyCost() {
-        return 0;
-    }
-
-    @Override
     public boolean isTerminateCommand() {
         return true;
     }

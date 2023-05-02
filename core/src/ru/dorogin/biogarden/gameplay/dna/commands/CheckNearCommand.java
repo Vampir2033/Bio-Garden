@@ -4,7 +4,6 @@ import ru.dorogin.biogarden.gameplay.EntityContainer;
 import ru.dorogin.biogarden.gameplay.dna.DNA;
 import ru.dorogin.biogarden.gameplay.entities.Animal;
 import ru.dorogin.biogarden.gameplay.entities.Entity;
-import ru.dorogin.biogarden.gameplay.entities.Grass;
 
 public abstract class CheckNearCommand implements Command {
     private final Direction direction;
@@ -37,11 +36,6 @@ public abstract class CheckNearCommand implements Command {
             finalShift = shiftIfNotFind;
         }
         animal.getDna().shiftRight(finalShift);
-    }
-
-    @Override
-    public int energyCost() {
-        return 0;
     }
 
     @Override
