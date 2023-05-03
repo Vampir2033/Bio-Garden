@@ -31,13 +31,13 @@ public class Animal extends Entity {
     public void update(EntityContainer entityContainer) {
         age++;
         energy -= TACT_ENERGY;
-        for(int i = 0; i < MAX_NON_TERMINATE_COMMANDS; i++){
-            Command command = dna.getNextCommand();
-            if(energy >= 0) {
+        if(energy >= 0) {
+            for(int i = 0; i < MAX_NON_TERMINATE_COMMANDS; i++){
+                Command command = dna.getNextCommand();
                 command.process(this, entityContainer);
-            }
-            if(command.isTerminateCommand()) {
-                break;
+                if(command.isTerminateCommand()) {
+                    break;
+                }
             }
         }
     }

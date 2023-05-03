@@ -12,14 +12,14 @@ import java.util.Random;
 
 public class Gameplay {
     private long lastUpdateTime;
-    private final static float fps = 20;
+    private final static float fps = 30;
     private final static float updateInterval = 1.0f / fps; // интервал обновления в секундах
     private final EntityContainer entityContainer;
     private final static int COUNT_ENTITIES = 100;
     private final static int COUNT_GRASS = 500;
 
     private final static float PLANT_GENERATE_CHANCE = 0.3f;
-    private final static int MAX_COUNT_PLANT = 80;
+    private final static int MAX_COUNT_PLANT = 50;
 
     public Gameplay(int width, int height) {
         entityContainer = new EntityContainer(width, height);
@@ -68,7 +68,7 @@ public class Gameplay {
     private Animal generateAnimal() {
         int x = new Random().nextInt(entityContainer.getWidth());
         int y = new Random().nextInt(entityContainer.getHeight());
-        DNA dna = new DNA(1000);
+        DNA dna = new DNA(300);
         return new Animal(x, y, dna, 1000);
     }
 
