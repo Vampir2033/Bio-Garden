@@ -6,9 +6,10 @@ import ru.dorogin.biogarden.gameplay.dna.commands.*;
 
 import java.util.Random;
 
+
 public class DNA {
     private static final float mutateProbability = 0.0005f;
-    private static final int AMOUNT_COMMANDS = 9;
+    private static final int AMOUNT_COMMANDS = 13;
     private final byte[] genSequence;
     private int currentPosition = 0;
 
@@ -37,7 +38,6 @@ public class DNA {
 
     }
 
-
     public Command getNextCommand() {
         int code = getNextCode() % AMOUNT_COMMANDS;
         switch (code) {
@@ -50,6 +50,10 @@ public class DNA {
             case 6: return new MeatEatCommand(this);
             case 7: return new NopCommand();
             case 8: return new ReproductionCommand(this);
+            case 9: return new RelativeCheckCommand(this);
+            case 10: return new SpeciesCheckCommand(this);
+            case 11: return new DifferentCheckCommand(this);
+            case 12: return new AtackCommand(this);
             default: return null;
         }
     }
@@ -85,5 +89,23 @@ public class DNA {
             }
         }
         return new DNA(childGenSequence, reproductionEnergy, percentOfEnergyForChildren, maxAge);
+    }
+
+    public Relationship calcRelationship(DNA himDna) {
+        int countDiff = calcDnaDiff(himDna);
+        return Relationship.getRelationshipByDifference(countDiff);
+    }
+
+    private int calcDnaDiff(DNA himDna) {
+        int countDiff = 0;
+        int minCountGen = Math.min(genSequence.length, himDna.genSequence.length);
+        int maxCountGen = Math.max(genSequence.length, himDna.genSequence.length);
+        for(int i = 0; i < minCountGen; i++) {
+            if(genSequence[i] != himDna.genSequence[i]) {
+                countDiff++;
+            }
+        }
+        countDiff += maxCountGen - minCountGen;
+        return countDiff;
     }
 }

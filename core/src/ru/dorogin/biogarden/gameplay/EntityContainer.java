@@ -2,6 +2,7 @@ package ru.dorogin.biogarden.gameplay;
 
 import com.badlogic.gdx.utils.Array;
 import lombok.Getter;
+import ru.dorogin.biogarden.gameplay.dna.commands.Direction;
 import ru.dorogin.biogarden.gameplay.entities.Entity;
 
 public class EntityContainer {
@@ -75,6 +76,12 @@ public class EntityContainer {
         return true;
     }
 
+    public Entity getNeighborEntity(Entity entity, Direction direction) {
+        int toX = entity.x + direction.x;
+        int toY = entity.y + direction.y;
+        return getEntity(toX, toY);
+    }
+
     private int castXToNormal(int x) {
         if(x < 0) {
             return width + x;
@@ -90,4 +97,5 @@ public class EntityContainer {
             return y % height;
         }
     }
+
 }
