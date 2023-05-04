@@ -5,9 +5,10 @@ import ru.dorogin.biogarden.gameplay.dna.DNA;
 import ru.dorogin.biogarden.gameplay.entities.Animal;
 import ru.dorogin.biogarden.gameplay.entities.Entity;
 
+import static ru.dorogin.biogarden.GlobalVars.ATACK_COST;
+import static ru.dorogin.biogarden.GlobalVars.ATACK_SIZE;
+
 public class AtackCommand implements Command {
-    private final static int ATACK_COST = 30;
-    private final static int ATACK_SIZE = 500;
     private final Direction direction;
 
     public AtackCommand(DNA dna) {

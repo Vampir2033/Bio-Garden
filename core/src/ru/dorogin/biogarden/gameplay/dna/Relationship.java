@@ -2,10 +2,12 @@ package ru.dorogin.biogarden.gameplay.dna;
 
 import lombok.Getter;
 
+import static ru.dorogin.biogarden.GlobalVars.*;
+
 public enum Relationship {
-    RELATIVES(10),              // родственники
-    ONE_SPECIES(50),            // один вид
-    DIFFERENT(Integer.MAX_VALUE),      // разные виды
+    RELATIVES(RELATIVES_MIN_DNK_DIFF),      // родственники
+    ONE_SPECIES(ONE_SPECIES_MIN_DNK_DIFF),  // один вид
+    DIFFERENT(DIFFERENT_MIN_DNK_DIFF),      // разные виды
     ;
 
     @Getter

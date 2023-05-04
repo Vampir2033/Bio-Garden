@@ -5,8 +5,10 @@ import ru.dorogin.biogarden.gameplay.dna.DNA;
 import ru.dorogin.biogarden.gameplay.entities.Animal;
 import ru.dorogin.biogarden.gameplay.entities.Entity;
 
+import static ru.dorogin.biogarden.GlobalVars.BASE_REPRODUCTION_ENERGY;
+
+
 public class ReproductionCommand implements Command {
-    private static final int BASE_REPRODUCTION_ENERGY = 500;
     private final Direction reproductionSide;
     private final byte shiftIfCantReproduct;
 
