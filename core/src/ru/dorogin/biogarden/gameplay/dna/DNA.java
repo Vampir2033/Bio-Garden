@@ -6,10 +6,10 @@ import ru.dorogin.biogarden.gameplay.dna.commands.*;
 
 import java.util.Random;
 
+import static ru.dorogin.biogarden.GlobalVars.*;
+
 
 public class DNA {
-    private static final float mutateProbability = 0.0005f;
-    private static final int AMOUNT_COMMANDS = 13;
     private final byte[] genSequence;
     private int currentPosition = 0;
 
@@ -30,16 +30,16 @@ public class DNA {
     public DNA(int length) {
         genSequence = new byte[length];
         for(int i = 0; i < length; i++) {
-            genSequence[i] = (byte) new Random().nextInt(100);
+            genSequence[i] = (byte) new Random().nextInt(MAX_COMMAND_VALUE);
         }
-        reproductionEnergy = 1500;
-        percentOfEnergyForChildren = 0.5f;
-        maxAge = 1000;
+        reproductionEnergy = MIN_REPRODUCTION_ENERGY;
+        percentOfEnergyForChildren = BASE_PERCENT_OF_ENERGY_FOR_CHILDREN;
+        maxAge = BASE_MAX_AGE;
 
     }
 
     public Command getNextCommand() {
-        int code = getNextCode() % AMOUNT_COMMANDS;
+        int code = getNextCode() % 13;
         switch (code) {
             case 0: return new MoveCommand(this);
             case 1: return new JumpCommand(this);
@@ -82,7 +82,7 @@ public class DNA {
         byte[] childGenSequence = new byte[genSequence.length];
         Random random = new Random();
         for(int i = 0; i < genSequence.length; i++) {
-            if(random.nextFloat() < mutateProbability) {
+            if(random.nextFloat() < MUTATE_PROBABILITY) {
                 childGenSequence[i] = (byte) random.nextInt(100);
             } else {
                 childGenSequence[i] = genSequence[i];

@@ -10,9 +10,10 @@ import ru.dorogin.biogarden.gameplay.EntityContainer;
 import ru.dorogin.biogarden.gameplay.dna.commands.Command;
 import ru.dorogin.biogarden.gameplay.dna.DNA;
 
+import static ru.dorogin.biogarden.GlobalVars.MAX_NON_TERMINATE_COMMANDS;
+import static ru.dorogin.biogarden.GlobalVars.ANIMAL_TACT_ENERGY;
+
 public class Animal extends Entity {
-    private static final int TACT_ENERGY = 1;
-    private static final int MAX_NON_TERMINATE_COMMANDS = 20;
 
     @Getter
     private final DNA dna;
@@ -30,7 +31,7 @@ public class Animal extends Entity {
     @Override
     public void update(EntityContainer entityContainer) {
         age++;
-        energy -= TACT_ENERGY;
+        energy -= ANIMAL_TACT_ENERGY;
         if(energy >= 0) {
             for(int i = 0; i < MAX_NON_TERMINATE_COMMANDS; i++){
                 Command command = dna.getNextCommand();

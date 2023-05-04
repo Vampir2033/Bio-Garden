@@ -1,7 +1,6 @@
 package ru.dorogin.biogarden.screen;
 
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -9,16 +8,15 @@ import ru.dorogin.biogarden.BioGardenGame;
 import ru.dorogin.biogarden.gameplay.entities.Entity;
 import ru.dorogin.biogarden.gameplay.Gameplay;
 
+import static ru.dorogin.biogarden.GlobalVars.*;
+
 public class GameFieldScreen implements Screen {
 
-    private static final int CELL_SIZE = 1;
-    private static final int GRID_WIDTH = 27*5 * CELL_SIZE;
-    private static final int GRID_HEIGHT = 15*5 * CELL_SIZE;
 
     private final BioGardenGame game;
-    private OrthographicCamera camera;
-    private ShapeRenderer shapeRenderer;
-    private Gameplay gameplay;
+    private final OrthographicCamera camera;
+    private final ShapeRenderer shapeRenderer;
+    private final Gameplay gameplay;
 
     public GameFieldScreen(BioGardenGame game) {
         this.game = game;
@@ -47,7 +45,7 @@ public class GameFieldScreen implements Screen {
         }
         game.batch.end();
         shapeRenderer.setProjectionMatrix(camera.combined);
-        drawGrid(GRID_HEIGHT, GRID_WIDTH, CELL_SIZE, Color.GRAY);
+        drawGrid();
     }
 
 
@@ -76,14 +74,14 @@ public class GameFieldScreen implements Screen {
 
     }
 
-    private void drawGrid(int rows, int cols, float cellSize, Color color) {
-        shapeRenderer.setColor(color);
+    private void drawGrid() {
+        shapeRenderer.setColor(GRID_COLOR);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        for (int i = 0; i < rows; i++) {
-            shapeRenderer.line(0, i * cellSize, cols * cellSize, i * cellSize);
+        for (int i = 0; i < GRID_HEIGHT; i++) {
+            shapeRenderer.line(0, i, GRID_WIDTH, i);
         }
-        for (int i = 0; i < cols; i++) {
-            shapeRenderer.line(i * cellSize, 0, i * cellSize, rows * cellSize);
+        for (int i = 0; i < GRID_WIDTH; i++) {
+            shapeRenderer.line(i, 0, i, GRID_HEIGHT);
         }
         shapeRenderer.end();
     }
