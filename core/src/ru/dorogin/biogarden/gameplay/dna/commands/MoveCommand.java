@@ -5,8 +5,9 @@ import ru.dorogin.biogarden.gameplay.entities.Entity;
 import ru.dorogin.biogarden.gameplay.EntityContainer;
 import ru.dorogin.biogarden.gameplay.dna.DNA;
 
+import static ru.dorogin.biogarden.GlobalVars.MOVE_ENERGY;
+
 public class MoveCommand implements Command {
-    private static final int MOVE_ENERGY = 10;
     private final Direction direction;
 
     public MoveCommand(DNA dna) {

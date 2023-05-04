@@ -10,21 +10,18 @@ import ru.dorogin.biogarden.gameplay.entities.Meat;
 
 import java.util.Random;
 
+import static ru.dorogin.biogarden.GlobalVars.*;
+
 public class Gameplay {
     private long lastUpdateTime;
-    private final static float fps = 20;
-    private final static float updateInterval = 1.0f / fps; // интервал обновления в секундах
+    private final static float updateInterval = 1.0f / FPS * 1000000000L; // интервал обновления в наносекундах
     private final EntityContainer entityContainer;
-    private final static int COUNT_ENTITIES = 100;
-    private final static int COUNT_GRASS = 500;
 
-    private final static float PLANT_GENERATE_CHANCE = 0.3f;
-    private final static int MAX_COUNT_PLANT = 80;
 
     public Gameplay(int width, int height) {
         entityContainer = new EntityContainer(width, height);
 
-        for (long count = COUNT_ENTITIES; count > 0; count--) {
+        for (long count = COUNT_ENTITIES_START; count > 0; count--) {
             try {
                 Animal animal = generateAnimal();
                 entityContainer.addEntity(animal);
@@ -32,7 +29,7 @@ public class Gameplay {
         }
 
 
-        for (long count = COUNT_GRASS; count > 0; count--) {
+        for (long count = COUNT_GRASS_START; count > 0; count--) {
             try {
                 Grass grass = generateGrass();
                 entityContainer.addEntity(grass);
@@ -43,7 +40,7 @@ public class Gameplay {
     public void update() {
         long timeSinceLastUpdate = TimeUtils.nanoTime() - lastUpdateTime;
 
-        if (timeSinceLastUpdate >= updateInterval * 1000000000L) {
+        if (timeSinceLastUpdate >= updateInterval) {
             // прошло достаточно времени для обновления
             lastUpdateTime = TimeUtils.nanoTime();
 
@@ -68,8 +65,8 @@ public class Gameplay {
     private Animal generateAnimal() {
         int x = new Random().nextInt(entityContainer.getWidth());
         int y = new Random().nextInt(entityContainer.getHeight());
-        DNA dna = new DNA(1000);
-        return new Animal(x, y, dna, 1000);
+        DNA dna = new DNA(BASE_DNA_LENGTH);
+        return new Animal(x, y, dna, ANIMAL_START_ENERGY);
     }
 
     private Grass generateGrass() {

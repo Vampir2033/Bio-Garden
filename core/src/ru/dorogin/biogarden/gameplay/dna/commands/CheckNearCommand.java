@@ -9,10 +9,10 @@ public abstract class CheckNearCommand implements Command {
     private final Direction direction;
     private final byte shiftIfFind;
     private final byte shiftIfNotFind;
-    private final Class entityClassForCheck;
+    private final Class<? extends Entity> entityClassForCheck;
 
-    public CheckNearCommand(DNA dna, Class entityClassForCheck) {
-        direction = Direction.values()[dna.getNextCode() % 4];
+    public CheckNearCommand(DNA dna, Class<? extends Entity> entityClassForCheck) {
+        direction = Direction.getDirectionByNumber(dna.getNextCode());
         shiftIfFind = dna.getNextCode();
         shiftIfNotFind = dna.getNextCode();
         this.entityClassForCheck = entityClassForCheck;

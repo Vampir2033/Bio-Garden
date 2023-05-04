@@ -10,38 +10,42 @@ import ru.dorogin.biogarden.gameplay.EntityContainer;
 import ru.dorogin.biogarden.gameplay.dna.commands.Command;
 import ru.dorogin.biogarden.gameplay.dna.DNA;
 
+import static ru.dorogin.biogarden.GlobalVars.MAX_NON_TERMINATE_COMMANDS;
+import static ru.dorogin.biogarden.GlobalVars.ANIMAL_TACT_ENERGY;
+
 public class Animal extends Entity {
-    private static final int TACT_ENERGY = 1;
-    private static final int MAX_NON_TERMINATE_COMMANDS = 20;
 
     @Getter
     private final DNA dna;
     @Getter @Setter
     private int energy;
+    private int age;
 
     public Animal(int x, int y, DNA dna, int energy) {
         super(x, y, new Sprite(generateSquare(dna.getDnaColor())));
         this.dna = dna;
         this.energy = energy;
+        age = 0;
     }
 
     @Override
     public void update(EntityContainer entityContainer) {
-        energy -= TACT_ENERGY;
-        for(int i = 0; i < MAX_NON_TERMINATE_COMMANDS; i++){
-            Command command = dna.getNextCommand();
-            if(energy >= 0) {
+        age++;
+        energy -= ANIMAL_TACT_ENERGY;
+        if(energy >= 0) {
+            for(int i = 0; i < MAX_NON_TERMINATE_COMMANDS; i++){
+                Command command = dna.getNextCommand();
                 command.process(this, entityContainer);
-            }
-            if(command.isTerminateCommand()) {
-                break;
+                if(command.isTerminateCommand()) {
+                    break;
+                }
             }
         }
     }
 
     @Override
     public boolean isAlive() {
-        return energy > 0;
+        return energy > 0 && age <= dna.getMaxAge();
     }
 
     public void subEnergy(int ammEnergy) {
